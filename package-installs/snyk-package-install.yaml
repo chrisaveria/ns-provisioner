@@ -1,4 +1,18 @@
 #@ load("@ytt:data", "data")
+#@ load("@ytt:yaml", "yaml")
+
+#@ def config():
+---
+namespace: #@ data.values.name
+targetImagePullSecret: registry-credentials
+snyk:
+  tokenSecret:
+    name: snyk-token-secret
+metadataStore:
+  caSecret:
+    importFromNamespace: "" 
+#@ end
+
 ---
 apiVersion: packaging.carvel.dev/v1alpha1
 kind: PackageInstall
@@ -20,15 +34,7 @@ spec:
 ---
 apiVersion: v1
 stringData:
-  values.yml: |
-    namespace: tanzu-java-web-app
-    targetImagePullSecret: registry-credentials
-    snyk:
-      tokenSecret:
-        name: snyk-token-secret
-    metadataStore:
-      caSecret:
-        importFromNamespace: "" #! since both Snyk and Grype both enable store, one must leave importFromNamespace blank
+  values.yml: #@ yaml.encode(config())
 kind: Secret
 metadata:
   name: #@ "snyk-scanner-" + data.values.name
