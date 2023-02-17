@@ -16,9 +16,9 @@ spec:
     - name: test
       params:
         - name: source-url
-          value: \$(params.source-url)
+          value: $(params.source-url)
         - name: source-revision
-          value: \$(params.source-revision)
+          value: $(params.source-revision)
       taskSpec:
         params:
           - name: source-url
@@ -27,6 +27,6 @@ spec:
           - name: test
             image: bitnami/dotnet-sdk
             script: |-
-              cd \`mktemp -d\`
-              wget -qO- \$(params.source-url) | tar xvz -m
+              cd `mktemp -d`
+              wget -qO- $(params.source-url) | tar xvz -m
               dotnet test TodoApi/TodoApiTest/TodoApiTest.csproj
