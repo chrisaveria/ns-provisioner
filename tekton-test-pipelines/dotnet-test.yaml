@@ -1,7 +1,7 @@
 #@ load("@ytt:data", "data")
 #@ if/end hasattr(data.values, "language") and data.values.language == "dotnet":
 ---
-piVersion: tekton.dev/v1beta1
+apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
   name: developer-defined-tekton-pipeline
