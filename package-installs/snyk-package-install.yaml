@@ -5,7 +5,7 @@
 #@ def config():
 ---
 namespace: #@ data.values.name
-targetImagePullSecret: registry-credentials
+targetImagePullSecret: registries-credentials
 snyk:
   tokenSecret:
     name: snyk-token-secret
