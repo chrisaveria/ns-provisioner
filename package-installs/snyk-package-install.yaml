@@ -20,7 +20,7 @@ kind: PackageInstall
 metadata:
   finalizers:
     - finalizers.packageinstall.packaging.carvel.dev/delete
-  name: #@ "grype-scanner-snyk-" + data.values.name
+  name: grype-scanner-snyk
   namespace: tap-install
 spec:
   packageRef:
@@ -38,7 +38,7 @@ stringData:
   values.yml: #@ yaml.encode(config())
 kind: Secret
 metadata:
-  name: #@ "grype-scanner-snyk-" + data.values.name
+  name: grype-scanner-snyk
   namespace: tap-install
 type: Opaque
 #@ end
