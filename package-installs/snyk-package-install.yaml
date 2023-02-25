@@ -1,6 +1,7 @@
 #@ load("@ytt:data", "data")
 #@ load("@ytt:yaml", "yaml")
 
+#@ if hasattr(data.values, "scanpolicy") and data.values.scanpolicy == "snyk":
 #@ def config():
 ---
 namespace: #@ data.values.name
@@ -25,7 +26,7 @@ spec:
   packageRef:
     refName: snyk.scanning.apps.tanzu.vmware.com
     versionSelection:
-      constraints: 1.0.0-beta.6
+      constraints: ">1.0.0"
       prereleases: {}
   serviceAccountName: tap-install-sa
   values:
@@ -40,3 +41,4 @@ metadata:
   name: #@ "grype-snyk-scanner-" + data.values.name
   namespace: tap-install
 type: Opaque
+#@ end
